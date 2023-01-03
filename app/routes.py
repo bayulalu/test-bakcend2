@@ -8,7 +8,7 @@ def index(id):
     return UserController.index(id)
 
 
-@app.route('/user', methods=['GET', 'POST'])
+@app.route('/user', methods=['GET', 'POST', 'PUT'])
 def user():
     if request.method == 'GET':
         return UserController.user()
@@ -16,7 +16,11 @@ def user():
         return UserController.save()
       
 
-@app.route('/user/<id>', methods=['GET'])
+@app.route('/user/<id>', methods=['GET', 'PUT'])
 def detail(id):
-    return UserController.detail(id)
+    if request.method == 'GET':
+        return UserController.detail(id)
+    elif request.method == 'PUT':
+        return UserController.update(id)
+   
     

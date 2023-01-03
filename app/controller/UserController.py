@@ -96,6 +96,33 @@ def save():
         db.session.add(usr)
         db.session.commit()
 
-        return response.success(input, 'Sukses Menambahkan Data User')
+        return response.success(input, 'success Menambahkan Data User')
+    except Exception as e:
+        print(e)
+
+def update(id):
+    try:
+        email = request.form.get('email')
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        avatar = request.form.get('avatar')
+
+        input = [{
+            'email': email,
+            'first_name': first_name,
+            'last_name': last_name,
+            'avatar': avatar
+        }]
+
+        user = User.query.filter_by(id=id).first()
+        user.email = email
+        user.first_name = first_name
+        user.last_name = last_name
+        user.avatar = avatar
+
+        db.session.commit()
+
+        return response.success(input, 'success update data!')
+
     except Exception as e:
         print(e)
