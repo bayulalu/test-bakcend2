@@ -16,11 +16,13 @@ def user():
         return UserController.save()
       
 
-@app.route('/user/<id>', methods=['GET', 'PUT'])
+@app.route('/user/<id>', methods=['GET', 'PUT', 'DELETE'])
 def detail(id):
     if request.method == 'GET':
         return UserController.detail(id)
     elif request.method == 'PUT':
         return UserController.update(id)
+    elif request.method == 'DELETE':
+        return UserController.delete(id)
    
     

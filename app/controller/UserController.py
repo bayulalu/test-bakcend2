@@ -126,3 +126,16 @@ def update(id):
 
     except Exception as e:
         print(e)
+
+def delete(id):
+    try:
+        usr = User.query.filter_by(id=id).first()
+        if not usr:
+            return response.badRequest([], 'Data User Empty...')
+        
+        db.session.delete(usr)
+        db.session.commit()
+
+        return response.success('', 'success Delete data!')
+    except Exception as e:
+        print(e)
