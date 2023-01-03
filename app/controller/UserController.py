@@ -28,13 +28,32 @@ def index(id):
                 db.session.add(usr)
                 db.session.commit()
 
+        # users = User.query.all()
+        # data = formatarray(users)
+
+        # print(users)
+        return response.success( resp.json()['data'], "Berhasil Singkron Data")
+    except Exception as e:
+        print(e)
+
+def user():
+    try:
         users = User.query.all()
         data = formatarray(users)
-
         # print(users)
         return response.success( data, "success")
     except Exception as e:
         print(e)
+
+def detail(id):
+    try:
+        user = User.query.filter_by(id=id).first()
+        data = singleObject(user)
+        # print(users)
+        return response.success( data, "success")
+    except Exception as e:
+        print(e)
+
 
 
 def formatarray(datas):
@@ -44,6 +63,7 @@ def formatarray(datas):
         array.append(singleObject(i))
     
     return array
+   
 
 def singleObject(data):
     data = {
