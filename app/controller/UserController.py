@@ -129,6 +129,12 @@ def update(id):
 
 def delete(id):
     try:
+        # Check the value of the Authorization header
+        auth_header = request.headers.get("Authorization")
+        if auth_header != "3cdcnTiBsl":
+            return response.badRequest(auth_header, "Unauthorized")
+
+
         usr = User.query.filter_by(id=id).first()
         if not usr:
             return response.badRequest([], 'Data User Empty...')

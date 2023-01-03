@@ -24,5 +24,5 @@ def detail(id):
         return UserController.update(id)
     elif request.method == 'DELETE':
         return UserController.delete(id)
-   
+
     
