@@ -76,3 +76,26 @@ def singleObject(data):
     }
 
     return data
+
+
+def save():
+    try:
+        email = request.form.get('email')
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        avatar = request.form.get('avatar')
+
+        input = [{
+            'email': email,
+            'first_name': first_name,
+            'last_name': last_name,
+            'avatar': avatar
+        }]
+
+        usr = User(email=email, first_name=first_name, last_name=last_name, avatar=avatar)
+        db.session.add(usr)
+        db.session.commit()
+
+        return response.success(input, 'Sukses Menambahkan Data User')
+    except Exception as e:
+        print(e)
